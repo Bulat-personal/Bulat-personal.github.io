@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio. Bulat Khalilrakhmanov</title>
+  <meta name="description" content="Senior QA Automation Engineer with 8+ years of experience designing, scaling, and owning automated test frameworks for web, mobile, and API-driven SaaS platforms." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --cyan:   #00d4ff;
+      --pink:   #ff006e;
+      --purple: #8338ec;
+      --bg:     #061520;
+      --bg2:    #07192a;
+      --bg3:    #071520;
+      --text:   #ffffff;
+      --muted:  rgba(255,255,255,.5);
+      --mono:   'JetBrains Mono', monospace;
+      --sans:   'Inter', sans-serif;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── Background — matches kanapatskaya.me exactly ── */
+    .grid-overlay {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      /* dark teal base */
+      background-color: #061520;
+      /* green grid lines like hers */
+      background-image:
+        linear-gradient(rgba(0,255,160,.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,255,160,.055) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    /* big central green glow orb — the main visual signature */
+    .grid-overlay::before {
+      content: '';
+      position: absolute;
+      width: 900px; height: 900px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,180,100,.18) 0%, rgba(0,100,80,.06) 50%, transparent 70%);
+      top: 50%; left: 50%; transform: translate(-50%, -50%);
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 200;
+      backdrop-filter: blur(16px) saturate(160%);
+      background: rgba(8,12,24,.75);
+      border-bottom: 1px solid rgba(0,212,255,.15);
+    }
+    .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 2.5rem; height: 64px; display: flex; align-items: center; justify-content: space-between; }
+    .brand { font-family: var(--mono); font-weight: 700; font-size: .95rem; color: var(--cyan); text-decoration: none; }
+    .brand em { color: var(--pink); font-style: normal; }
+    .brand-cursor { display:inline-block; width:10px; height:1em; background:var(--pink); margin-left:2px; vertical-align:text-bottom; animation:blink .9s step-end infinite; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-family: var(--mono); font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); text-decoration: none; transition: color .2s; }
+    .nav-links a:hover { color: var(--cyan); }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative; display: flex; flex-direction: column; justify-content: center;
+      padding: 90px 2.5rem 3rem; overflow: hidden;
+      background: var(--bg);
+    }
+    /* floating dots like hers */
+    .hero-dot { position: absolute; border-radius: 50%; pointer-events: none; }
+    .hero-dot-1 { width: 10px; height: 10px; background: var(--cyan); top: 30%; left: 18%; box-shadow: 0 0 12px var(--cyan); }
+    .hero-dot-2 { width: 8px; height: 8px; background: var(--pink); top: 28%; right: 20%; box-shadow: 0 0 12px var(--pink); }
+    .hero-dot-3 { width: 6px; height: 6px; background: var(--cyan); bottom: 35%; left: 12%; box-shadow: 0 0 10px var(--cyan); }
+    .hero-dot-4 { width: 7px; height: 7px; background: var(--purple); bottom: 30%; right: 15%; box-shadow: 0 0 10px var(--purple); }
+    /* large blurred orbs */
+    .orb { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; }
+    .orb-1 { width: 500px; height: 500px; background: rgba(0,100,80,.18); top: 50%; left: 50%; transform: translate(-50%,-50%); }
+    .orb-2 { width: 300px; height: 300px; background: rgba(131,56,236,.1); bottom: 0; right: 10%; }
+    .orb-3 { width: 250px; height: 250px; background: rgba(255,0,110,.07); top: 15%; left: 5%; }
+
+    .hero-content { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; width: 100%; }
+
+    /* terminal box — full width like hers */
+    .terminal {
+      display: block; width: 100%;
+      font-family: var(--mono); font-size: .85rem;
+      border: 1px solid rgba(0,212,255,.25); background: rgba(0,20,40,.55);
+      padding: .55rem .9rem; border-radius: 8px; margin-bottom: 1rem;
+      color: var(--cyan);
+    }
+    .terminal-line1 { display: flex; align-items: center; gap: .65rem; margin-bottom: .45rem; }
+    .terminal .prompt { color: var(--pink); }
+    .terminal .cmd { color: #7fff7f; }
+    .terminal-cursor { display: inline-block; width: 10px; height: 1.1em; background: var(--cyan); margin-left: 2px; animation: blink .9s step-end infinite; vertical-align: text-bottom; }
+    .terminal-resume {
+      display: inline-flex; align-items: center; gap: .45rem;
+      font-family: var(--mono); font-size: .78rem; color: rgba(255,255,255,.75);
+      text-decoration: none; cursor: pointer; transition: color .2s;
+    }
+    .terminal-resume .resume-text {
+      text-decoration: underline; text-underline-offset: 3px;
+    }
+    .terminal-resume:hover { color: #fff; }
+
+    /* name */
+    .hero-name {
+      font-size: clamp(3.5rem, 9vw, 8rem);
+      font-weight: 700; line-height: .95; letter-spacing: -.04em;
+      margin-bottom: 1.25rem; text-align: center;
+    }
+    .hero-name .line1 { display: block; color: #fff; }
+    .hero-name .line2 {
+      display: block;
+      background: linear-gradient(90deg, var(--purple) 0%, var(--cyan) 50%, #00ff88 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-name .dot { -webkit-text-fill-color: var(--pink); color: var(--pink); }
+
+    .hero-sub {
+      text-align: center;
+      font-family: var(--mono); font-size: clamp(.9rem, 2vw, 1.15rem);
+      color: var(--muted); margin-bottom: 1.5rem;
+    }
+    .hero-sub .cursor-char { color: var(--cyan); animation: blink 1s step-end infinite; }
+
+    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.25rem; }
+
+    /* ── ABOUT ── */
+    #about { position: relative; z-index: 1; padding: 7rem 2.5rem; background: var(--bg2); }
+    .about-inner { max-width: 1200px; margin: 0 auto; }
+
+    /* two-column layout: text left, photo right */
+    .about-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+      margin-bottom: 5rem;
+    }
+    .about-title {
+      font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 800; margin-bottom: 1.25rem;
+      padding-bottom: 1.1rem;
+      border-bottom: 2px solid rgba(255,255,255,.18);
+      letter-spacing: -.02em;
+    }
+    .about-body p { font-size: 1.05rem; line-height: 1.85; color: rgba(255,255,255,.85); margin-bottom: 1.25rem; }
+    .about-read { font-family: var(--mono); font-size: .72rem; text-transform: uppercase; letter-spacing: .15em; color: var(--muted); text-decoration: none; transition: color .2s; }
+    .about-read:hover { color: var(--cyan); }
+
+    /* photo (right column) */
+    .about-photo-wrap {
+      position: relative; height: min(80vh, 700px); overflow: hidden; border-radius: 12px;
+    }
+    @media(min-width:1025px) {
+      .about-photo-wrap { height: min(90vh, 850px); }
+    }
+    .about-photo-wrap img {
+      width: 100%; height: 100%; object-fit: contain; object-position: center top; display: block;
+      filter: grayscale(100%);
+      background: var(--bg2);
+    }
+    .about-photo-wrap::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 50%, rgba(9,30,48,.85) 100%),
+                  radial-gradient(ellipse at 60% 50%, rgba(255,0,110,.15) 0%, transparent 60%);
+    }
+
+    /* 4-card grid */
+    .about-cards {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+      border: 1px solid rgba(255,255,255,.08); border-radius: 12px; overflow: hidden;
+    }
+    .about-card {
+      padding: 2.5rem 2rem; text-align: center;
+      background: rgba(255,255,255,.03);
+      border: none; transition: background .2s;
+    }
+    .about-card:hover { background: rgba(255,255,255,.06); }
+    .about-card + .about-card { border-left: 1px solid rgba(255,255,255,.08); }
+    .about-card:nth-child(3), .about-card:nth-child(4) { border-top: 1px solid rgba(255,255,255,.08); }
+    .about-card:nth-child(3) { border-left: none; }
+    .about-card:nth-child(4) { border-left: 1px solid rgba(255,255,255,.08); }
+    .card-icon { font-size: 1.6rem; margin-bottom: 1rem; opacity: .8; }
+    .card-label { font-size: 1rem; font-weight: 600; margin-bottom: .4rem; }
+    .card-sub { font-size: .85rem; color: var(--muted); }
+
+    /* ── QUALIFICATIONS ── */
+    #qualifications {
+      position: relative; z-index: 1; padding: 7rem 2.5rem;
+      background: linear-gradient(180deg, #0a1e32 0%, #0d1828 100%);
+      overflow: hidden;
+    }
+    #qualifications .orb { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; }
+    .q-orb-1 { width: 300px; height: 300px; background: rgba(255,0,110,.12); top: 20%; left: 20%; }
+    .q-orb-2 { width: 250px; height: 250px; background: rgba(0,212,255,.1); top: 40%; right: 25%; }
+    .q-orb-3 { width: 200px; height: 200px; background: rgba(0,255,100,.06); bottom: 20%; left: 50%; }
+
+    .qual-inner { max-width: 900px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
+
+    .gradient-title {
+      font-size: clamp(2.5rem, 7vw, 5rem); font-weight: 700; letter-spacing: -.03em; margin-bottom: .6rem;
+      background: linear-gradient(90deg, var(--pink) 0%, var(--purple) 50%, var(--cyan) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .gradient-title-line {
+      width: 60px; height: 2px; margin: 0 auto 3rem;
+      background: linear-gradient(90deg, var(--pink), var(--cyan));
+    }
+
+    .qual-list { list-style: none; display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 4rem; }
+    .qual-list li { font-size: 1rem; color: rgba(255,255,255,.8); line-height: 1.6; }
+
+    .stats-bar {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border: 1px solid rgba(255,255,255,.08); border-radius: 10px; overflow: hidden;
+    }
+    .stat-item { padding: 2rem 1rem; text-align: center; background: rgba(255,255,255,.02); }
+    .stat-item + .stat-item { border-left: 1px solid rgba(255,255,255,.08); }
+    .stat-num {
+      font-family: var(--mono); font-size: 2.4rem; font-weight: 700;
+      color: var(--cyan); line-height: 1; margin-bottom: .4rem;
+    }
+    .stat-num.pink { color: var(--pink); }
+    .stat-num.purple { color: var(--purple); }
+    .stat-label { font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+
+    /* ── PROJECTS ── */
+    #projects {
+      position: relative; z-index: 1; padding: 7rem 2.5rem;
+      background: linear-gradient(180deg, #0d1828 0%, #0a1e32 100%);
+      overflow: hidden;
+    }
+    .proj-orb-1 { position:absolute; width:300px; height:300px; background:rgba(255,0,110,.1); top:10%; left:10%; border-radius:50%; filter:blur(100px); }
+    .proj-orb-2 { position:absolute; width:300px; height:300px; background:rgba(0,212,255,.08); bottom:20%; right:10%; border-radius:50%; filter:blur(100px); }
+
+    .proj-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+    .proj-header { text-align: center; margin-bottom: 1.25rem; }
+    .proj-sub { text-align: center; font-size: .95rem; color: var(--muted); max-width: 650px; margin: 0 auto 4rem; line-height: 1.7; }
+
+    .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .proj-card {
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.09);
+      border-radius: 12px; padding: 2rem; position: relative; overflow: hidden;
+      transition: border-color .25s, background .25s;
+    }
+    .proj-card:hover { border-color: rgba(0,212,255,.25); background: rgba(255,255,255,.06); }
+    .proj-card .orb-card { position:absolute; width:180px; height:180px; border-radius:50%; filter:blur(70px); top:-40px; right:-40px; pointer-events:none; }
+    .proj-company { font-size: 1.25rem; font-weight: 600; margin-bottom: .35rem; }
+    .proj-date { font-family: var(--mono); font-size: .72rem; color: var(--cyan); margin-bottom: .85rem; }
+    .proj-desc { font-size: .9rem; color: rgba(255,255,255,.65); line-height: 1.7; margin-bottom: 1.25rem; }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: .45rem; margin-bottom: 1.5rem; }
+    .proj-tag {
+      font-family: var(--mono); font-size: .7rem; padding: .25rem .7rem;
+      border: 1px solid rgba(255,255,255,.2); border-radius: 999px;
+      color: rgba(255,255,255,.75); background: transparent;
+    }
+    .proj-link {
+      font-family: var(--mono); font-size: .7rem; text-transform: uppercase; letter-spacing: .12em;
+      color: var(--muted); text-decoration: none; display: inline-flex; align-items: center; gap: .4rem;
+      transition: color .2s;
+    }
+    .proj-link:hover { color: var(--cyan); }
+
+    /* ── SKILLS ── */
+    #skills { position: relative; z-index: 1; padding: 7rem 2.5rem; background: var(--bg2); }
+    .skills-inner { max-width: 1200px; margin: 0 auto; }
+    .skills-header { text-align: center; margin-bottom: 4rem; }
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+    .skill-card {
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+      border-radius: 10px; padding: 1.75rem;
+      transition: border-color .2s, background .2s;
+    }
+    .skill-card:hover { border-color: rgba(0,212,255,.25); background: rgba(255,255,255,.06); }
+    .skill-icon { font-size: 1.5rem; margin-bottom: .85rem; }
+    .skill-cat { font-family: var(--mono); font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; color: var(--cyan); margin-bottom: .85rem; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .s-tag { font-family: var(--mono); font-size: .7rem; padding: .22rem .6rem; border-radius: 4px; background: rgba(0,212,255,.07); border: 1px solid rgba(0,212,255,.15); color: rgba(255,255,255,.78); }
+
+    /* ── CONTACT ── */
+    #contact {
+      position: relative; z-index: 1; padding: 8rem 2.5rem;
+      background: linear-gradient(180deg, #0a1e32 0%, var(--bg) 100%);
+      text-align: center; overflow: hidden;
+    }
+    .c-orb-1 { position:absolute; width:400px; height:400px; background:rgba(131,56,236,.12); top:0; left:50%; transform:translateX(-50%); border-radius:50%; filter:blur(120px); pointer-events:none; }
+    .contact-inner { max-width: 620px; margin: 0 auto; position: relative; z-index: 1; }
+    .contact-inner p { font-size: 1.05rem; color: rgba(255,255,255,.62); line-height: 1.8; margin: 1.5rem 0 2.5rem; }
+    .contact-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex; align-items: center; gap: .6rem;
+      font-family: var(--mono); font-size: .82rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase;
+      padding: .85rem 1.8rem; border-radius: 6px; text-decoration: none; transition: all .2s;
+    }
+    .btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+    .btn-outline { border: 1px solid var(--cyan); color: var(--cyan); background: transparent; }
+    .btn-outline:hover { background: rgba(0,212,255,.1); box-shadow: 0 0 20px rgba(0,212,255,.2); }
+    .btn-filled { border: 1px solid var(--cyan); background: var(--cyan); color: var(--bg); }
+    .btn-filled:hover { background: transparent; color: var(--cyan); }
+    .btn-pink { border: 1px solid var(--pink); color: var(--pink); background: transparent; }
+    .btn-pink:hover { background: rgba(255,0,110,.1); }
+
+    /* ── Footer ── */
+    footer {
+      position: relative; z-index: 1; text-align: center; padding: 2rem;
+      background: rgba(8,12,24,.95); border-top: 1px solid rgba(255,255,255,.06);
+      font-family: var(--mono); font-size: .7rem; color: var(--muted);
+    }
+    footer span { color: var(--cyan); }
+
+    /* ── Scroll-to-top — matches Yulia's style ── */
+    #scrollTop {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 500;
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--cyan); border: none;
+      color: var(--bg); display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; font-weight: 700; transition: all .2s; opacity: 0; pointer-events: none;
+      box-shadow: 0 0 20px rgba(0,212,255,.4);
+    }
+    #scrollTop.show { opacity: 1; pointer-events: auto; }
+    #scrollTop:hover { background: #fff; box-shadow: 0 0 28px rgba(0,212,255,.6); }
+
+    /* ── Animations ── */
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    .reveal { opacity:0; transform:translateY(28px); transition:opacity .6s ease,transform .6s ease; }
+    .reveal.in { opacity:1; transform:none; }
+
+    /* ── Responsive ── */
+    @media(max-width:900px) {
+      .nav-links { display:none; }
+      .about-top { grid-template-columns: 1fr; gap: 3rem; }
+      .about-photo-wrap { height: 400px; }
+      .about-cards { grid-template-columns:1fr; }
+      .about-card + .about-card { border-left:none; border-top:1px solid rgba(255,255,255,.08); }
+      .about-card:nth-child(3){ border-left:none; }
+      .about-card:nth-child(4){ border-left:none; }
+      .proj-grid { grid-template-columns:1fr; }
+      .skills-grid { grid-template-columns:1fr 1fr; }
+      .stats-bar { grid-template-columns:1fr 1fr; }
+      .stat-item:nth-child(3){ border-left:none; border-top:1px solid rgba(255,255,255,.08); }
+      .stat-item:nth-child(4){ border-top:1px solid rgba(255,255,255,.08); }
+    }
+    @media(max-width:600px) {
+      .skills-grid { grid-template-columns:1fr; }
+      .stats-bar { grid-template-columns:1fr 1fr; }
+    }
+
+    ::-webkit-scrollbar { width:4px; }
+    ::-webkit-scrollbar-track { background:var(--bg); }
+    ::-webkit-scrollbar-thumb { background:rgba(0,212,255,.25); border-radius:2px; }
+  </style>
+</head>
+<body>
+
+<div class="grid-overlay"></div>
+
+<!-- Nav -->
+<nav>
+  <div class="nav-inner">
+    <a href="#hero" class="brand">bulat.khalilrakhmanov<span class="brand-cursor"></span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#qualifications">Qualifications</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="hero-dot hero-dot-1"></div>
+  <div class="hero-dot hero-dot-2"></div>
+  <div class="hero-dot hero-dot-3"></div>
+  <div class="hero-dot hero-dot-4"></div>
+  <div class="hero-content">
+    <div class="terminal">
+      <div class="terminal-line1">
+        <span class="prompt">&gt;_</span>
+        <span>bulat.khalilrakhmanov@portfolio:~$</span>
+        <span class="cmd">download portfolio</span>
+      </div>
+      <a href="Bulat_Khalilrakhmanov_QA_Engineer.pdf" target="_blank" rel="noopener" class="terminal-resume">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span class="resume-text">Resume</span>
+      </a>
+    </div>
+    <h1 class="hero-name">
+      <span class="line1">Bulat</span>
+      <span class="line2">Khalilrakhmanov<span class="dot">.</span></span>
+    </h1>
+    <p class="hero-sub">Senior QA Automation Engineer</p>
+    <div class="hero-btns">
+      <a href="https://linkedin.com/in/bulatkh" target="_blank" rel="noopener" class="btn btn-outline">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+      <a href="mailto:bulat.k.dev@gmail.com" class="btn btn-pink">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Contact
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-top">
+      <div>
+        <h2 class="about-title reveal">Overview</h2>
+        <div class="about-body reveal">
+          <p>I'm a Senior QA Automation Engineer with 8+ years of experience designing, scaling, and owning automated test frameworks for web, mobile, and API-driven SaaS platforms.</p>
+          <p>My core strength is building automation infrastructure that actually holds up in production — migrating legacy suites, embedding quality gates into CI/CD pipelines, and reducing release risk through measurable outcomes. I work at the intersection of engineering and product, partnering closely with developers and PMs to shape quality strategy from the earliest stages of each sprint.</p>
+          <p>I've led test automation at scale — from migrating 300 Cypress tests to Playwright and achieving 70% coverage at BioDigital, to building BDD frameworks from scratch at Namely and implementing mobile automation at Yandex. Increasingly, I apply AI-assisted tooling and LLM-powered workflows to accelerate test generation and authoring.</p>
+          <!-- <a href="mailto:bulat.k.dev@gmail.com" class="about-read">Read full story →</a> -->
+        </div>
+      </div>
+      <div class="about-photo-wrap reveal">
+        <img src="photo.jpg" alt="Bulat Khalilrakhmanov"
+          onerror="this.closest('.about-photo-wrap').style.display='none'" />
+      </div>
+    </div>
+
+    <div class="about-cards reveal">
+      <div class="about-card">
+        <div class="card-icon">&lt;/&gt;</div>
+        <div class="card-label">8+ Years of Experience</div>
+        <div class="card-sub">Building and scaling test automation systems</div>
+      </div>
+      <div class="about-card">
+        <div class="card-icon">⚡</div>
+        <div class="card-label">Scope</div>
+        <div class="card-sub">Web, mobile & API-driven SaaS platforms</div>
+      </div>
+      <div class="about-card">
+        <div class="card-icon">🤖</div>
+        <div class="card-label">AI-Assisted Testing</div>
+        <div class="card-sub">LLM test generation, Playwright MCP, Copilot</div>
+      </div>
+      <div class="about-card">
+        <div class="card-icon">🚀</div>
+        <div class="card-label">Impact</div>
+        <div class="card-sub">70% coverage, 40% faster QA handoff, 300+ tests</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── QUALIFICATIONS ── -->
+<section id="qualifications">
+  <div class="orb q-orb-1"></div>
+  <div class="orb q-orb-2"></div>
+  <div class="orb q-orb-3"></div>
+  <div class="qual-inner">
+    <h2 class="gradient-title reveal">Qualifications</h2>
+    <div class="gradient-title-line reveal"></div>
+    <ul class="qual-list reveal">
+      <li>QA automation expert specializing in Playwright, Cypress, Selenium, and Appium frameworks at scale</li>
+      <li>End-to-end ownership of test infrastructure — from strategy and framework design to CI/CD integration and release management</li>
+      <li>Hands-on experience with API testing, data validation, and backend business logic verification</li>
+      <li>Growing application of AI and LLM-powered workflows to accelerate test generation and authoring</li>
+      <li>Agile/Scrum practitioner with strong cross-team collaboration between engineering, product, and QA</li>
+    </ul>
+    <div class="stats-bar reveal">
+      <div class="stat-item">
+        <div class="stat-num">8+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">300+</div>
+        <div class="stat-label">Tests Automated</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num pink">70%</div>
+        <div class="stat-label">Test Coverage</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num purple">40%</div>
+        <div class="stat-label">Faster QA Handoff</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROJECTS ── -->
+<section id="projects">
+  <div class="proj-orb-1"></div>
+  <div class="proj-orb-2"></div>
+  <div class="proj-inner">
+    <div class="proj-header reveal">
+      <h2 class="gradient-title">Featured Projects</h2>
+      <div class="gradient-title-line"></div>
+    </div>
+    <p class="proj-sub reveal">Work spanning web, mobile, and API platforms — from migrating legacy test suites to building automation frameworks from the ground up.</p>
+
+    <div class="proj-grid">
+
+      <div class="proj-card reveal">
+        <div class="orb-card" style="background:rgba(0,212,255,.1)"></div>
+        <div class="proj-company">BioDigital</div>
+        <div class="proj-date">Sep 2021 – Present &nbsp;·&nbsp; New York City, NY &nbsp;·&nbsp; Remote</div>
+        <p class="proj-desc">Led the full migration of 300 Cypress E2E tests to Playwright for BioDigital's 3D human anatomy platform, achieving 70% test coverage and significantly improving suite reliability and maintainability.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">Playwright</span>
+          <span class="proj-tag">TypeScript</span>
+          <span class="proj-tag">Appium</span>
+          <span class="proj-tag">Postman</span>
+          <span class="proj-tag">GitHub Actions</span>
+        </div>
+        <a href="#" class="proj-link">Visit Project ↗</a>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="orb-card" style="background:rgba(255,0,110,.1)"></div>
+        <div class="proj-company">Epam Systems</div>
+        <div class="proj-date">Aug 2020 – Sep 2021 &nbsp;·&nbsp; New York City, NY</div>
+        <p class="proj-desc">Introduced Selenium with Java for UI testing at Epam, integrating continuous testing into the CI/CD pipeline and cutting regression cycle time from 4 to 2 days. Paired with RestAssured for API validation and deep SQL data verification.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">Selenium</span>
+          <span class="proj-tag">Java</span>
+          <span class="proj-tag">RestAssured</span>
+          <span class="proj-tag">SQL</span>
+          <span class="proj-tag">JIRA</span>
+        </div>
+        <a href="#" class="proj-link">Visit Project ↗</a>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="orb-card" style="background:rgba(131,56,236,.12)"></div>
+        <div class="proj-company">Namely HR Platform</div>
+        <div class="proj-date">Jun 2018 – Aug 2020 &nbsp;·&nbsp; New York City, NY &nbsp;·&nbsp; Hybrid</div>
+        <p class="proj-desc">Designed and implemented a hybrid Selenium/Cucumber BDD automation framework from scratch for Namely's HR SaaS product, boosting test coverage by 75% and enabling faster, higher-quality releases.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">Selenium</span>
+          <span class="proj-tag">Java</span>
+          <span class="proj-tag">Cucumber</span>
+          <span class="proj-tag">Ruby</span>
+          <span class="proj-tag">SQL</span>
+          <span class="proj-tag">Jenkins</span>
+        </div>
+        <a href="#" class="proj-link">Visit Project ↗</a>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="orb-card" style="background:rgba(0,255,100,.08)"></div>
+        <div class="proj-company">Sophia Learning</div>
+        <div class="proj-date">Jan 2017 – May 2018 &nbsp;·&nbsp; Minneapolis, MN &nbsp;·&nbsp; On-site</div>
+        <p class="proj-desc">Built a Page Object Model framework using Cypress with BDD Cucumber for Sophia Learning's e-learning platform, automating cross-browser functional and regression testing across the full product.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">Cypress</span>
+          <span class="proj-tag">Cucumber</span>
+          <span class="proj-tag">Gherkin</span>
+          <span class="proj-tag">Jenkins</span>
+          <span class="proj-tag">Maven</span>
+          <span class="proj-tag">SQL</span>
+        </div>
+        <a href="#" class="proj-link">Visit Project ↗</a>
+      </div>
+
+      <div class="proj-card reveal">
+        <div class="orb-card" style="background:rgba(255,0,110,.08)"></div>
+        <div class="proj-company">Yandex.Eats</div>
+        <div class="proj-date">Oct 2013 – Dec 2016 &nbsp;·&nbsp; Moscow, Russia</div>
+        <p class="proj-desc">Implemented Appium-based mobile automation for iOS and Android at Yandex.Eats, delivering comprehensive regression coverage for the food delivery app and increasing team efficiency by 30%.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">Appium</span>
+          <span class="proj-tag">BrowserStack</span>
+          <span class="proj-tag">TestRail</span>
+          <span class="proj-tag">JIRA</span>
+          <span class="proj-tag">Agile/Scrum</span>
+        </div>
+        <a href="#" class="proj-link">Visit Project ↗</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── SKILLS ── -->
+<section id="skills">
+  <div class="skills-inner">
+    <div class="skills-header reveal">
+      <h2 class="gradient-title">Skills</h2>
+      <div class="gradient-title-line"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <div class="skill-icon">⚡</div>
+        <div class="skill-cat">Automation & Coding</div>
+        <div class="skill-tags">
+          <span class="s-tag">Playwright</span><span class="s-tag">TypeScript</span>
+          <span class="s-tag">Cypress</span><span class="s-tag">Selenium</span>
+          <span class="s-tag">Java</span><span class="s-tag">Appium</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🔗</div>
+        <div class="skill-cat">API & Data</div>
+        <div class="skill-tags">
+          <span class="s-tag">Postman</span><span class="s-tag">RestAssured</span>
+          <span class="s-tag">SQL</span><span class="s-tag">JMeter</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🚀</div>
+        <div class="skill-cat">DevOps & CI/CD</div>
+        <div class="skill-tags">
+          <span class="s-tag">GitHub Actions</span><span class="s-tag">Jenkins</span>
+          <span class="s-tag">Docker</span><span class="s-tag">Git</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🤖</div>
+        <div class="skill-cat">AI & ML Testing</div>
+        <div class="skill-tags">
+          <span class="s-tag">LLM Test Generation</span><span class="s-tag">GitHub Copilot</span>
+          <span class="s-tag">Playwright MCP</span><span class="s-tag">Claude Code</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">📋</div>
+        <div class="skill-cat">QA Strategy</div>
+        <div class="skill-tags">
+          <span class="s-tag">Test Planning</span><span class="s-tag">BDD / TDD</span>
+          <span class="s-tag">Agile / Scrum</span><span class="s-tag">Release Management</span>
+        </div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon">🛠️</div>
+        <div class="skill-cat">Tools & Frameworks</div>
+        <div class="skill-tags">
+          <span class="s-tag">Cucumber</span><span class="s-tag">TestRail</span>
+          <span class="s-tag">JIRA</span><span class="s-tag">BrowserStack</span>
+          <span class="s-tag">Confluence</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="c-orb-1"></div>
+  <div class="contact-inner">
+    <div class="reveal">
+      <h2 class="gradient-title">Contact</h2>
+      <div class="gradient-title-line"></div>
+      <p>Based in Miami, FL / New York City, NY and open to relocation. Looking for senior QA engineering roles where automation quality, CI/CD ownership, and AI-powered testing matter.</p>
+      <div class="contact-btns">
+        <a href="mailto:bulat.k.dev@gmail.com" class="btn btn-filled">bulat.k.dev@gmail.com</a>
+        <a href="https://linkedin.com/in/bulatkh" target="_blank" rel="noopener" class="btn btn-outline">LinkedIn ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Bulat Khalilrakhmanov</span> &nbsp;·&nbsp; Senior QA Automation Engineer &nbsp;·&nbsp; Miami, FL / New York City, NY
+</footer>
+
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+  // Reveal on scroll
+  const io = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) { setTimeout(() => e.target.classList.add('in'), i * 70); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Scroll-to-top
+  const st = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => st.classList.toggle('show', window.scrollY > 400));
+
+  // Active nav
+  document.querySelectorAll('section[id]').forEach(s => {
+    new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          document.querySelectorAll('.nav-links a').forEach(l => {
+            l.style.color = l.getAttribute('href') === '#' + e.target.id ? 'var(--cyan)' : '';
+          });
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' }).observe(s);
+  });
+</script>
+</body>
+</html>
